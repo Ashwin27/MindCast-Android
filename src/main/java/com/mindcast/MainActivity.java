@@ -20,8 +20,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        statusFeed = new StatusFeed();
-
+        statusFeed = new StatusFeed(this);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

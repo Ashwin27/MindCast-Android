@@ -4,6 +4,6 @@
     <string name="app_name">MindCast</string>
     <string name="action_settings">Settings</string>
     <string name="status_hint">What\'s on your mind</string>
-    <string name="send">Send</string>
-
+    <string name="sendButton">Send</string>
+    <string name="castButton">Cast</string>
 </resources>
