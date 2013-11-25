@@ -33,17 +33,24 @@ public class HttpObject extends AsyncTask<String, String, String> {
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
             }
-        } catch (ClientProtocolException e) {
-            //TODO Handle problems..
-        } catch (IOException e) {
-            //TODO Handle problems..
         }
+
+        catch (ClientProtocolException e) {
+            //TODO Handle problems..
+            e.getMessage();
+        }
+
+        catch (IOException e) {
+            //TODO Handle problems..
+
+        }
+
         return responseString;
     }
 
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        //Do anything with response..
+        //TODO: Send back data to populate status/chat message lists
     }
 }
