@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,8 +23,10 @@ public class StatusFeed {
     private MainActivity viewClass;
 
     public StatusFeed(MainActivity mainActivity) {
-        getStatuses();
         this.viewClass = mainActivity;
+        statusList = new ArrayList<Status>();
+
+        getStatuses();
     }
 
     private boolean getStatuses(){
