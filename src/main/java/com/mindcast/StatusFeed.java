@@ -11,24 +11,10 @@ import android.view.View;
 /**
  * Created by Ashwin on 11/24/13.
  */
-public class StatusFeed extends View {
+public class StatusFeed {
 
-    public StatusFeed(Context context){
-        super(context);
-    }
+    public StatusFeed(){
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-        Rect bkgd = new Rect();
-        bkgd.set(0, 0, canvas.getWidth(), canvas.getHeight());
-
-        Paint bkgdImg = new Paint();
-        bkgdImg.setColor(Color.BLUE);
-        bkgdImg.setStyle(Paint.Style.FILL);
-
-        canvas.drawRect(bkgd, bkgdImg);
     }
 
     private Status getStatuses(){

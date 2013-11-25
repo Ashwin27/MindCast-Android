@@ -19,14 +19,17 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        statusFeed = new StatusFeed(this);
-        setContentView(statusFeed);
+        setContentView(R.layout.fragment_main);
+        statusFeed = new StatusFeed();
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+
     }
 
 
