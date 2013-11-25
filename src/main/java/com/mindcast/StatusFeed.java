@@ -6,11 +6,22 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,15 +32,25 @@ public class StatusFeed {
 
     private List<Status> statusList;
     private MainActivity viewClass;
+    private String url, domain, protocol, path;
+
 
     public StatusFeed(MainActivity mainActivity) {
         this.viewClass = mainActivity;
         statusList = new ArrayList<Status>();
 
+        domain = "";
+        protocol = "http";
+        path = "/MindCast/scripts/php/chat.php";
+
+        url = protocol + "://" + domain + path;
+
         getStatuses();
     }
 
     private boolean getStatuses(){
+        new HttpObject().execute(url);
+
         // TODO: Create HttpRequest object here and pass it to populateStatusList()
         boolean success = populateStatusList();
 
@@ -69,7 +90,6 @@ public class StatusFeed {
 
         return success;
     }
-
 
 }
 
