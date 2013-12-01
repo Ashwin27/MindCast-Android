@@ -15,13 +15,27 @@ import java.io.IOException;
 
 public class HttpObject extends AsyncTask<String, String, String> {
 
+    StatusFeed statusFeed;
+
+    public HttpObject(StatusFeed statusFeed){
+        this.statusFeed = statusFeed;
+    }
+
     @Override
     protected String doInBackground(String... uri) {
         HttpClient httpclient = new DefaultHttpClient();
         HttpResponse response;
         String responseString = null;
         try {
-            response = httpclient.execute(new HttpGet(uri[0]));
+            try{
+                response = httpclient.execute(new HttpGet(uri[0]));
+            }
+
+            catch(Exception ex){
+                ex.getMessage();
+                return null;
+            }
+
             StatusLine statusLine = response.getStatusLine();
             if(statusLine.getStatusCode() == HttpStatus.SC_OK){
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -52,5 +66,6 @@ public class HttpObject extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         //TODO: Send back data to populate status/chat message lists
+        statusFeed.populateStatusList(result);
     }
 }

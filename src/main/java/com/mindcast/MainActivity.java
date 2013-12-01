@@ -10,17 +10,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
 
     StatusFeed statusFeed;
+    ListView statusList;
+    StatusAdapter statusArrayAdapter;
+    ArrayList<Status> list = new ArrayList<Status>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        statusFeed = new StatusFeed(this);
+
+        statusList = (ListView)findViewById(R.id.statusList);
+        statusArrayAdapter = new StatusAdapter(this, R.layout.fragment_main, list);
+
+        statusFeed = new StatusFeed(this, list, statusArrayAdapter);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -67,5 +79,5 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
     }
-
 }
+

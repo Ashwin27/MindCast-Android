@@ -30,16 +30,18 @@ import java.util.List;
  */
 public class StatusFeed {
 
-    private List<Status> statusList;
+    private ArrayList<Status> statusList;
+    private StatusAdapter statusArrayAdapter;
     private MainActivity viewClass;
     private String url, domain, protocol, path;
 
 
-    public StatusFeed(MainActivity mainActivity) {
+    public StatusFeed(MainActivity mainActivity, ArrayList<Status> statusList, StatusAdapter statusArrayAdapter) {
         this.viewClass = mainActivity;
-        statusList = new ArrayList<Status>();
+        this.statusList = statusList;
+        this.statusArrayAdapter = statusArrayAdapter;
 
-        domain = "";
+        domain = "192.168.0.102:80";
         protocol = "http";
         path = "/MindCast/scripts/php/chat.php";
 
@@ -48,48 +50,42 @@ public class StatusFeed {
         getStatuses();
     }
 
-    private boolean getStatuses(){
-        new HttpObject().execute(url);
+    private void getStatuses() {
+        HttpObject serverAccessObject = new HttpObject(this);
+        serverAccessObject.execute(url);
 
         // TODO: Create HttpRequest object here and pass it to populateStatusList()
-        boolean success = populateStatusList();
-
-        if(success)
-        {
-            for(Status status : statusList){
-                Button myButton = new Button(viewClass);
-                myButton.setText(status.getStatus());
-                myButton.setHeight(LayoutParams.WRAP_CONTENT);
-                myButton.setWidth(LayoutParams.MATCH_PARENT);
-
-                LinearLayout ll = (LinearLayout)viewClass.findViewById(R.id.statusList);
-                LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                ll.addView(myButton, lp);
-            }
-        }
-        else {
-            success = false;
         }
 
-        return success;
-    }
-
-    private boolean populateStatusList(){
+    public boolean populateStatusList(String response) {
         boolean success = true;
 
-        try{
-            statusList.add( new Status("SampleUser", "SampleStatus") );
-            statusList.add( new Status("SampleUser", "SampleStatus") );
-            statusList.add( new Status("SampleUser", "SampleStatus") );
-            statusList.add( new Status("SampleUser", "SampleStatus") );
+        try {
+            statusList.add(new Status("SampleUser", "SampleStatus"));
+            statusList.add(new Status("SampleUser", "SampleStatus"));
+            statusList.add(new Status("SampleUser", "SampleStatus"));
+            statusList.add(new Status("SampleUser", "SampleStatus"));
+
+            statusArrayAdapter.notifyDataSetChanged();
         }
 
-        catch(Exception ex){
+        catch (Exception ex) {
             success = false;
         }
 
         return success;
     }
 
-}
+    private void UpdateUI() {
+        for (Status status : statusList) {
+            Button myButton = new Button(viewClass);
+            myButton.setText(status.getStatus());
+            myButton.setHeight(LayoutParams.WRAP_CONTENT);
+            myButton.setWidth(LayoutParams.MATCH_PARENT);
 
+            LinearLayout ll = (LinearLayout) viewClass.findViewById(R.id.statusList);
+            LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            ll.addView(myButton, lp);
+        }
+    }
+}
