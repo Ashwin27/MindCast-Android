@@ -22,15 +22,15 @@ public class StatusAdapter extends ArrayAdapter<Status> {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.fragment_main, (RelativeLayout)((MainActivity)context).findViewById(R.id.statusList));
+            view = inflater.inflate(R.layout.fragment_main, null);
         }
+
+        (view.findViewById(R.id.status)).setVisibility(View.VISIBLE);
 
         Status item = getItem(position);
         if (item!= null) {
-            // My layout has only one TextView
             TextView itemView = (TextView) view.findViewById(R.id.statusMessage);
             if (itemView != null) {
-                // do whatever you want with your string and long
                 itemView.setText(item.getStatus());
             }
         }

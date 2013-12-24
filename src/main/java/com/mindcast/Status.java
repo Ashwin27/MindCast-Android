@@ -9,6 +9,10 @@ public class Status{
         this.status = status;
     }
 
+    public Status(){
+
+    }
+
     public String getStatus(){
         return this.status;
     }

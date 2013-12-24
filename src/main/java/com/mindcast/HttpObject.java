@@ -1,5 +1,6 @@
 package com.mindcast;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import org.apache.http.HttpResponse;
@@ -9,6 +10,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,9 +20,16 @@ import java.io.IOException;
 public class HttpObject extends AsyncTask<String, String, String> {
 
     StatusFeed statusFeed;
+    //ProgressDialog dialog;
 
     public HttpObject(StatusFeed statusFeed){
         this.statusFeed = statusFeed;
+    }
+
+    @Override
+    protected void onPreExecute()
+    {
+        super.onPreExecute();
     }
 
     @Override
@@ -66,6 +77,10 @@ public class HttpObject extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         //TODO: Send back data to populate status/chat message lists
-        statusFeed.populateStatusList(result);
+        try {
+            statusFeed.populateStatusList(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

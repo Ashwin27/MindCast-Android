@@ -19,9 +19,8 @@ import java.util.ArrayList;
 public class MainActivity extends ActionBarActivity {
 
     StatusFeed statusFeed;
-    ListView statusList;
     StatusAdapter statusArrayAdapter;
-    ArrayList<Status> list = new ArrayList<Status>();
+    ArrayList<Status> statusList = new ArrayList<Status>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +28,10 @@ public class MainActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_main);
 
-        statusList = (ListView)findViewById(R.id.statusList);
-        statusArrayAdapter = new StatusAdapter(this, R.layout.fragment_main, list);
+        statusArrayAdapter = new StatusAdapter(this, R.layout.fragment_main, statusList);
+        ((ListView)findViewById(R.id.statusFeed)).setAdapter(statusArrayAdapter);
 
-        statusFeed = new StatusFeed(this, list, statusArrayAdapter);
+        statusFeed = new StatusFeed(this, statusList, statusArrayAdapter);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

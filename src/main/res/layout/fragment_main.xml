@@ -10,20 +10,21 @@
 
     <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/light_blue">
+        android:orientation="horizontal" android:visibility="invisible"
+        android:id="@+id/status">
     <ImageView
-        android:layout_height="50dp"
-        android:layout_width="50dp"
-        android:src="@drawable/sample_man"
+        android:layout_height="70dp"
+        android:layout_width="70dp"
+        android:src="@drawable/sample_woman"
         android:layout_marginLeft="15dp" />
 
     <TextView
         android:id="@+id/statusMessage"
-        android:layout_marginTop="10dp"
-        android:textSize="25dp"
+        android:layout_marginTop="15dp"
+        android:textSize="15dp"
         android:layout_marginLeft="15dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/status_hint"/>
 </LinearLayout>
 </RelativeLayout>
