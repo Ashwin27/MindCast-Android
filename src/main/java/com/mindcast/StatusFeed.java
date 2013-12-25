@@ -78,11 +78,6 @@ public class StatusFeed {
         }
 
         try {
-            statusList.add(new Status("SampleUser", "SampleStatus 1"));
-            statusList.add(new Status("SampleUser", "SampleStatus 2"));
-            statusList.add(new Status("SampleUser", "SampleStatus 3"));
-            statusList.add(new Status("SampleUser", "SampleStatus 4"));
-
             statusArrayAdapter.notifyDataSetChanged();
         }
 
